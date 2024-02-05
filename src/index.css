@@ -1,0 +1,13 @@
+.mynav{
+    background-color: rgb(156, 210, 241) !important;
+}
+.navitems .nav-item .nav-link.active{
+    font-weight: 900;
+    color:red;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+.dropdown-toggle{
+    color: black !important;
+    text-decoration: none;
+}
