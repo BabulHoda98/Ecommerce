@@ -190,11 +190,11 @@
       "isPaymentCompleted": false
     },
     {
-      "id": "709c",
-      "productId": "8",
+      "id": "b6d4",
+      "productId": "7",
       "userId": "2",
       "quantity": 1,
-      "isPaymentCompleted": false
+      "isPaymentCompleted": true
     }
   ]
 }
