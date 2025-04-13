@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../context/CreateContext";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [loginData, setLoginData] = useState({
@@ -12,69 +12,70 @@ function Login() {
   let navigate = useNavigate();
 
   let handlechange = (e) => {
-
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
   //auth
-  let auth = useAuth()
+  let auth = useAuth();
 
   useEffect(() => {
     document.title = "Ecommerce Login";
-  },[]);
+  }, []);
 
-// success alert toastify
-const notifysuccess = () =>toast.success('🦄 Log is Successfully DONE!', {
-  position: "top-center",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "colored",
-  });
-// unsuccess alert toastify
-const notifyunsuccess = () =>toast.error('🦄 Login is Unsuccessfull', {
-  position: "top-center",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "dark",
-  });
-  
+  // success alert toastify
+  const notifysuccess = () =>
+    toast.success("🦄 Log is Successfully DONE!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  // unsuccess alert toastify
+  const notifyunsuccess = () =>
+    toast.error("🦄 Login is Unsuccessfull", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
   // onLoginClick
-  let onLoginClick = async () =>{
-    let response = await fetch(`http://localhost:4000/users?email=${loginData.useremail}&password=${loginData.userpassword}`,
-    {method:"GET"}
+  let onLoginClick = async () => {
+    let response = await fetch(
+      `http://localhost:4000/users?email=${loginData.useremail}&password=${loginData.userpassword}`,
+      { method: "GET" }
     );
-    if(response.ok){
-      let responseBody = await response.json()  
-      // console.log(responseBody);
-      if(responseBody.length>0){
-        setTimeout(()=>{
-          navigate('/store')
-        },3000)
+    if (response.ok) {
+      let responseBody = await response.json();
+      console.log(responseBody);  
+      if (responseBody.length > 0) {
+        setTimeout(() => {
+          navigate("/store");
+        }, 3000);
         auth.setCondata({
           ...auth.condata,
           isLogedIn: true,
           currentUserName: responseBody[0]?.fullname,
           currentUserId: responseBody[0]?.id,
-          currentUserRole:responseBody[0]?.role
-
-        })
-        notifysuccess()
-      }else{
-        notifyunsuccess()
-    }
-  }else{
+          currentUserRole: responseBody[0]?.role,
+        });
+        notifysuccess();
+      } else {
+        notifyunsuccess();
+      }
+    } else {
       notifyunsuccess();
     }
-};
+  };
 
-return (
+  return (
     <div>
       <div className="row">
         <div className="col-lg-5 col-md-7 mx-auto">
@@ -94,7 +95,7 @@ return (
                   name="useremail"
                   value={loginData.useremail}
                   onChange={handlechange}
-                  id="email"
+                  id="useremail"
                   className="form-control"
                   placeholder="Email..."
                 />
@@ -106,30 +107,35 @@ return (
                   name="userpassword"
                   value={loginData.userpassword}
                   onChange={handlechange}
-                  id="email"
+                  id="userpassword"
                   className="form-control"
                   placeholder="Password..."
                 />
               </div>
             </div>
             <div className="card-footer">
-              <button className="btn btn-outline-info d-block w-100" onClick={onLoginClick}>LOGIN</button>
+              <button
+                className="btn btn-outline-info d-block w-100"
+                onClick={onLoginClick}
+              >
+                LOGIN
+              </button>
             </div>
           </div>
         </div>
       </div>
       <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            />
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

@@ -15,5 +15,14 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "users": [
+    {
+      "id": 1,
+      "fullname": "Babul Hoda",
+      "email": "babulhoda98@gmail.com",
+      "password": "Admin@1234",
+      "role": "admin"
+    }
+  ]
 }
